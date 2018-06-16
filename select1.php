@@ -1,4 +1,8 @@
 <html>
+<head>
+<script src="jquery.min.js"></script>
+</head>
+	
 <body>
 
 
