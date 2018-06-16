@@ -19,7 +19,7 @@ while ($r2=mysqli_fetch_array($ck2))
 {
 	echo"<tr> <td> $r2[init_user_id] </td><td> $r2[eventtype_id] </td><td> $r2[topic_id] </td><td>
 	 $r2[favour] </td><td> $r2[date] </td><td> $r2[time] </td> 
-	<td> <input type='button' id='b1' value='Join'> </td> </tr>   ";
+	<td> <input type='button' id='b2' value='Join'> </td> </tr>   ";
 }
 
 
