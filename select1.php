@@ -23,8 +23,7 @@ while($r=mysqli_fetch_array($ck))
 </select>
 
 
-
-City :<select name="y" id="y">
+	City :<select name="y" id="y">
 
 
 <?php 
@@ -45,6 +44,8 @@ while($r1=mysqli_fetch_array($ck1))
 ?>
 </select>
 
+	<input type="button" name="b1" id="b1" value="Show">
+	
 <p id="x"></p>
 
 
