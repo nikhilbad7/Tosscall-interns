@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 15, 2018 at 10:10 AM
+-- Generation Time: Jun 15, 2018 at 12:21 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -30,7 +30,7 @@ CREATE TABLE `City` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `state_id` int(11) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,13 +43,13 @@ CREATE TABLE `Event` (
   `id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   `eventtype_id` int(11) NOT NULL,
-  `favour` varchar(30) NOT NULL,
+  `favour` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
   `city_id` int(11) NOT NULL,
   `init_user_id` int(11) NOT NULL,
   `acce_user_id` int(11) DEFAULT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -61,7 +61,7 @@ CREATE TABLE `Event` (
 CREATE TABLE `EventType` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -76,7 +76,7 @@ CREATE TABLE `Likes` (
   `liker_user_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -92,7 +92,7 @@ CREATE TABLE `Message` (
   `message` longtext NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -105,7 +105,7 @@ CREATE TABLE `Notification` (
   `id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -117,7 +117,7 @@ CREATE TABLE `Notification` (
 CREATE TABLE `State` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -128,8 +128,8 @@ CREATE TABLE `State` (
 
 CREATE TABLE `Topic` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `status` int(1) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -141,9 +141,9 @@ CREATE TABLE `Topic` (
 CREATE TABLE `User` (
   `id` int(11) NOT NULL,
   `username` varchar(25) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `city` int(11) NOT NULL,
-  `status` int(1) NOT NULL
+  `name` varchar(30) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -215,7 +215,7 @@ ALTER TABLE `Topic`
 --
 ALTER TABLE `User`
   ADD PRIMARY KEY (`id`,`username`),
-  ADD KEY `city_fk` (`city`);
+  ADD KEY `city_fk` (`city_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -301,7 +301,7 @@ ALTER TABLE `Notification`
 -- Constraints for table `User`
 --
 ALTER TABLE `User`
-  ADD CONSTRAINT `city_fk` FOREIGN KEY (`city`) REFERENCES `City` (`id`);
+  ADD CONSTRAINT `city_fk` FOREIGN KEY (`city_id`) REFERENCES `City` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
