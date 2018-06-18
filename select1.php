@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['u']))
+{
+echo "<script>window.location='login.php'</script>";
+}
+?>
+
+
+
 <html>
 <head>
 <script src="jquery.min.js"></script>
@@ -18,7 +29,7 @@ $ck=mysqli_query($c,$s);
 
 while($r=mysqli_fetch_array($ck))
 {
-	echo"<option value=$r[name]>
+	echo"<option value='$r[name]'>
 	       $r[name]
 	     </option>";
  
@@ -40,7 +51,7 @@ $ck1=mysqli_query($c,$s1);
 
 while($r1=mysqli_fetch_array($ck1))
 {
-	echo"<option value=$r1[name]>
+	echo"<option value='$r1[name]'>
 	       $r1[name]
 	     </option>";
 
