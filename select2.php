@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 
 $a=$_REQUEST["k1"];
 $b=$_REQUEST["k2"];
