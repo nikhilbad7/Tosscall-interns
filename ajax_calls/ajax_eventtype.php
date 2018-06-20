@@ -1,17 +1,13 @@
 
 <?php 
 require_once('../config.inc.php');
-if(isset($_GET['state']))
-{
-$state = $_GET['state'];
 $returnArray = [];
 $conn   =   mysql_connect("localhost","root","rut@localhost");
 if ($conn)
 {
 
 mysql_select_db('tosscall_db');
-$sql    =   "SELECT name FROM city WHERE status=1 and state='";
-$sql    .= $state."';";
+$sql    =   "SELECT name FROM eventtype WHERE status=1;";
 $result =   mysql_query($sql);
 if ($result)
 {
@@ -25,7 +21,6 @@ if($returnArray)
 echo json_encode($returnArray);
 }
 
-}
 }
 }
 ?>
