@@ -1,25 +1,26 @@
 <?php 
 session_start();
+$username=$_SESSION['username'];
+$type=$_REQUEST["k1"];
+$city=$_REQUEST["k2"];
+$c=mysqli_connect('localhost','root','','tosscall_db');
 
-$a=$_REQUEST["k1"];
-$b=$_REQUEST["k2"];
 
-$c=mysqli_connect('localhost','root','','tosscall');
+$query="select * from event where eventtype='$type' and city='$city' and init_user='$username' and status=1";
 
-
-$s2="select * from event where eventtype_id=$a and city_id=$b and status=1";
-
-$ck2=mysqli_query($c,$s2);
+$rs=mysqli_query($c,$query);
+if($rs){
 
 echo"<table>";
-echo"<tr>   <td> Name </td><td> Type </td><td> Initiator </td><td> Topic </td><td> Favour </td>
-<td> Date </td><td> Time </td> <td></td>     </tr>   ";
+echo"<th>  Initiator </th><th> Type </th><th> Topic1 </th><th> Topic2 </th><th> Favour </th>
+<th> Date </th><th> Time </th> <th>Join Now</th>";
 
-while ($r2=mysqli_fetch_array($ck2)) 
+while ($row=mysqli_fetch_array($rs)) 
 {
-	echo"<tr> <td> $r2[init_user_id] </td><td> $r2[eventtype_id] </td><td> $r2[topic_id] </td><td>
-	 $r2[favour] </td><td> $r2[date] </td><td> $r2[time] </td> 
-	<td> <input type='button' id='b2' value='Join'> </td> </tr>   ";
+	echo"<tr> <td> $row[init_user] </td><td> $row[eventtype] </td><td> $row[name1] </td><td>$row[name2]</td>
+	 <td> $row[favour] </td><td> $row[date] </td><td> $row[time] </td> 
+	<td> <input type='button' id=$row[id] value='Join'> </td> </tr>   ";
+}
 }
 
 

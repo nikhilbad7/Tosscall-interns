@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-if(!isset($_SESSION['u']))
+$username=$_SESSION['username'];
+if(!isset($_SESSION['username']))
 {
 echo "<script>window.location='login.php'</script>";
 }
@@ -10,36 +10,36 @@ echo "<script>window.location='login.php'</script>";
 
 
 <html>
-
+<head>
+	<script type="text/javascript" src="jq.js"></script>
+</head>
 <body>
-<form>
-<h1> <input type="submit" name="logout" value="Logout"> </h1>
-</form>
-<br>
-
-<?php
-
-if(isset($_REQUEST['b1']))
-{
-echo"<script>window.location='logout.php'</script>";
-}
-
-?>
+	<ul>
+			<li><a href="start.php">Start</a></li>
+			<!--<li><a href="select1.php">Select</a></li>-->
+			<li><a href="#">Watch</a></li>
+			<li><a href="List.php">List</a></li>
+			<li><a href="#">Notification</a></li>
+			<li><a href="#">MyDiscussion</a></li>
+			<li><a href="logout.php">Logout</a></li>
+		</ul>
+<hr>
 
 
 
 
-Type :<select name="z" id="z">
+
+Type :<select name="type" id="type">
 
 <?php 
  
-$c=mysqli_connect('localhost','root','','tosscall');
+$c=mysqli_connect('localhost','root','','tosscall_db');
 
-$s="select * from topic";
+$query="select * from eventtype";
 
-$ck=mysqli_query($c,$s);
+$rs=mysqli_query($c,$query);
 
-while($r=mysqli_fetch_array($ck))
+while($r=mysqli_fetch_array($rs))
 {
 	echo"<option value='$r[name]'>
 	       $r[name]
@@ -51,12 +51,12 @@ while($r=mysqli_fetch_array($ck))
 
 
 
-City :<select name="y" id="y">
+City :<select name="city" id="city">
 
 
 <?php 
  
-$c=mysqli_connect('localhost','root','','tosscall');
+$c=mysqli_connect('localhost','root','','tosscall_db');
 
 $s1="select * from city ";
 
@@ -74,7 +74,7 @@ while($r1=mysqli_fetch_array($ck1))
 
 <input type="button" name="b1" id="b1" value="Show">
 
-<p id="x"></p>
+<div id="x"></div>
 
 
 <script type="text/javascript">
@@ -82,10 +82,10 @@ while($r1=mysqli_fetch_array($ck1))
 
 $(document).ready(function(){
 		$("#b1").click(function(){
-			var m=$("#z").val();
-			var n=$("#y").val();
-
-			$.post('select2.php',{k1:m,k2:n},function(data){
+			var type=$("#type").val();
+			var city=$("#city").val();
+			
+			$.post('select2.php',{k1:type,k2:city},function(data){
 				$("#x").html(data);
 			});
 		});
