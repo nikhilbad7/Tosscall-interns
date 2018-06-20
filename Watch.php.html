@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <script type="text/javascript" src="jquery.min.js"></script>
+    </head>
+<body>
+<div>
+<select id="state_select"><option disabled>--</option></select>
+<select id="city_select"><option disabled>--</option></select>
+<select id="type_select"><option disabled>--</option></select>
+</div>
+<div>Live</div>
+<div><table id="live_event">
+    <tr>
+        <th>Topic</th>
+        <th>Initiater</th>
+        <th>Accepter</th>
+        <th>Start Date</th>
+        <th>Start Time</th>
+    </tr>
+</table>
+</div>
+<div>Over</div>
+<div><table id="over_event">
+        <tr>
+            <th>Topic</th>
+            <th>Initiater</th>
+            <th>Accepter</th>
+            <th>Start Date</th>
+            <th>Start Time</th>
+        </tr>
+    </table>
+    </div>
+    <script>
+        var cleanedData = null;
+        function optionParser(select_element,data,class_value)
+        {
+            option_str  =   null;
+            for(i=0;i<data.length;i++)
+                        {
+                            option_str  = "<option class='";
+                            option_str  += class_value + "' value='";
+                            option_str  += data[i]['id'] + "'>";
+                            option_str  += data[i]['name'];
+                            option_str  += "</option>"
+                            $(select_element).append(option_str);
+                        }
+
+        }
+        function useFetchedData(fetched_data)
+        {
+            cleanedData = fetched_data;
+
+        }
+        function fetchData(ajax_page,args)
+            {
+                $.ajax({
+                    async:false,
+                    url: ajax_page,
+                    success: function(data){
+                        useFetchedData(JSON.parse(data));
+                    }
+                });
+
+                        return cleanedData;
+            }
+        function getEvent(ajax_page,event_status)// id = 0 (unavailable), 1 (available),2 (accepted), 3 (live),4 (over)
+        {
+            cleanedData = fetchData(ajax_page,event_status);
+        }
+        function selectChanger(select_element,ajax_page,args='',class_value='')
+        {
+           parsedData   = fetchData(ajax_page,args);
+           if (parsedData != null)
+           {
+            optionParser(select_element,parsedData,class_value);
+
+           }
+        }
+        $(document).ready(function(){
+            selectChanger("#state_select","ajax_calls/ajax_states.php");
+            $("#state_select").change(function()
+            {
+                selectChanger("#city_select","ajax_calls/ajax_cities.php");
+            });
+            
+            selectChanger("#type_select","ajax_calls/ajax_type.php");
+        });
+
+            </script>
+</body> 
+
+</html>
