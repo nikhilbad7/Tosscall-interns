@@ -24,21 +24,20 @@ if(isset($_REQUEST['b1']))
 {
 
 
-$z=$_GET["x"];
-$v=$_GET["y"];
+$username=$_GET["x"];
+$password=$_GET["y"];
 
 
-$c=mysqli_connect('localhost','root','','tosscall');
+$c=mysqli_connect('localhost','root','','tosscall_db');
 
-$s="select * from login where username='$z' and password='$v'"; 
+$q="select * from login where username='$username' and password='$password'"; 
 
 
-$ck=mysqli_query($c,$s);
+$rs=mysqli_query($c,$q);
 
-if($row=mysqli_fetch_array($ck))
+if($row=mysqli_fetch_array($rs))
 {
-	$_SESSION['u']=$z;
-	
+	$_SESSION['username']=$username;	
 	echo"<script>window.location='home.php'</script>";
 	     
 }

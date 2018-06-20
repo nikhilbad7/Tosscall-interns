@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 19, 2018 at 03:21 PM
+-- Host: 127.0.0.1
+-- Generation Time: Jun 20, 2018 at 10:35 AM
 -- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -33,6 +33,14 @@ CREATE TABLE `city` (
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`id`, `name`, `state`, `status`) VALUES
+(1, 'Vijayawada', 'Andhra Pradesh', 1),
+(2, 'Itanagar', 'Arunachal Pradesh', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -41,8 +49,9 @@ CREATE TABLE `city` (
 
 CREATE TABLE `event` (
   `id` int(11) NOT NULL,
-  `topic` varchar(255) NOT NULL,
-  `eventtype` int(255) NOT NULL,
+  `name1` varchar(255) NOT NULL,
+  `name2` varchar(255) NOT NULL,
+  `eventtype` varchar(255) NOT NULL,
   `favour` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -52,6 +61,13 @@ CREATE TABLE `event` (
   `city` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `name1`, `name2`, `eventtype`, `favour`, `date`, `time`, `init_user`, `acce_user`, `status`, `city`) VALUES
+(5, 'Srk', 'Salman', 'Bollywood', 'Srk', '2018-06-22', '14:00:00', 'admin', NULL, 1, 'Itanagar');
+
 -- --------------------------------------------------------
 
 --
@@ -60,9 +76,19 @@ CREATE TABLE `event` (
 
 CREATE TABLE `eventtype` (
   `id` int(11) NOT NULL,
-  `name` int(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `eventtype`
+--
+
+INSERT INTO `eventtype` (`id`, `name`, `status`) VALUES
+(1, 'Politics', 1),
+(2, 'Bollywood', 1),
+(3, 'Hollywood', 1),
+(4, 'Sports', 1);
 
 -- --------------------------------------------------------
 
@@ -89,6 +115,13 @@ CREATE TABLE `login` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`username`, `password`) VALUES
+('admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -131,6 +164,16 @@ CREATE TABLE `state` (
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `state`
+--
+
+INSERT INTO `state` (`id`, `name`, `status`) VALUES
+(1, 'Andhra Pradesh', 1),
+(2, 'Arunachal Pradesh', 1),
+(3, 'Assam', 1),
+(4, 'Bihar', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -143,6 +186,13 @@ CREATE TABLE `topic` (
   `name2` varchar(255) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `topic`
+--
+
+INSERT INTO `topic` (`id`, `name1`, `name2`, `status`) VALUES
+(1, 'Srk', 'Salman', 1);
 
 -- --------------------------------------------------------
 
@@ -230,17 +280,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `eventtype`
 --
 ALTER TABLE `eventtype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `likes`
 --
@@ -260,12 +310,12 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `state`
 --
 ALTER TABLE `state`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `topic`
 --
 ALTER TABLE `topic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --
