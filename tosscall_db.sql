@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2018 at 10:35 AM
+-- Generation Time: Jun 20, 2018 at 11:36 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -121,7 +121,10 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`username`, `password`) VALUES
-('admin', 'admin');
+('admin', 'admin'),
+('anshul', 'anshul'),
+('nikhil', 'nikhil'),
+('poonam', 'poonam');
 
 -- --------------------------------------------------------
 
