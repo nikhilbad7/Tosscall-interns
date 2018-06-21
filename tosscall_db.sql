@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2018 at 11:36 AM
+-- Generation Time: Jun 21, 2018 at 09:42 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -66,7 +66,9 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`id`, `name1`, `name2`, `eventtype`, `favour`, `date`, `time`, `init_user`, `acce_user`, `status`, `city`) VALUES
-(5, 'Srk', 'Salman', 'Bollywood', 'Srk', '2018-06-22', '14:00:00', 'admin', NULL, 1, 'Itanagar');
+(5, 'Srk', 'Salman', 'Bollywood', 'Srk', '2018-06-22', '14:00:00', 'admin', 'nikhil', 2, 'Itanagar'),
+(6, 'cricket', 'football', 'Sports', 'cricket', '2018-06-23', '14:00:00', 'nikhil', NULL, 1, 'Vijayawada'),
+(7, 'tom cruise', 'jack sparrow', 'Hollywood', 'jack sparrow', '2018-06-27', '13:59:00', 'anshul', NULL, 1, 'Itanagar');
 
 -- --------------------------------------------------------
 
@@ -195,7 +197,9 @@ CREATE TABLE `topic` (
 --
 
 INSERT INTO `topic` (`id`, `name1`, `name2`, `status`) VALUES
-(1, 'Srk', 'Salman', 1);
+(1, 'Srk', 'Salman', 1),
+(2, 'cricket', 'football', 1),
+(3, 'tom cruise', 'jack sparrow', 1);
 
 -- --------------------------------------------------------
 
@@ -288,7 +292,7 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `eventtype`
 --
@@ -318,7 +322,7 @@ ALTER TABLE `state`
 -- AUTO_INCREMENT for table `topic`
 --
 ALTER TABLE `topic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user`
 --

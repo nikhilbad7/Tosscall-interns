@@ -12,11 +12,12 @@ echo "<script>window.location='login.php'</script>";
 <html>
 <head>
 	<script type="text/javascript" src="jq.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
 </head>
 <body>
 	<ul>
 			<li><a href="start.php">Start</a></li>
-			<!--<li><a href="select1.php">Select</a></li>-->
+			<li><a href="Home.php">Home</a></li>
 			<li><a href="#">Watch</a></li>
 			<li><a href="List.php">List</a></li>
 			<li><a href="#">Notification</a></li>
@@ -74,7 +75,20 @@ while($r1=mysqli_fetch_array($ck1))
 
 <input type="button" name="b1" id="b1" value="Show">
 
-<div id="x"></div>
+<div id="x">
+	<!--<script type="text/javascript">
+		function join(){
+		alert($(this).id);	
+	var initiator = $(this).closest('tr').find('.initiator').text();
+	var date = $(this).closest('tr').find('.date').text();
+	var time = $(this).closest('tr').find('.time').text();
+	alert(initiator);
+	alert(date);
+	alert(time); 
+} 
+		
+	</script> -->
+</div>
 
 
 <script type="text/javascript">
@@ -86,12 +100,32 @@ $(document).ready(function(){
 			var city=$("#city").val();
 			
 			$.post('select2.php',{k1:type,k2:city},function(data){
+				
 				$("#x").html(data);
 			});
 		});
+
+
+		$("body").on("click",".join",function(){
+			var id=	$(this).attr("id");
+			//var initiator = $(this).attr('init_user');
+			//var date
+			$.post('opponent.php',{k3:id},function(data){
+				location.reload();
+				//$("#x").html(data);
+			});
+			
+		})
 	});
 
-
+	/*function join(this){
+	var initiator = $(this).closest('tr').find('.initiator').text();
+	var date = $(this).closest('tr').find('.date').text();
+	var time = $(this).closest('tr').find('.time').text();
+	alert(initiator);
+	alert(date);
+	alert(time);
+} */
 </script>
 </body>
 </html>
