@@ -16,12 +16,16 @@ $rs=mysqli_query($c,$query);
 if($rs){
 
 echo"<table>";
-echo"<th>  Initiator </th><th> Type </th><th> Topic1 </th><th> Topic2 </th><th> Favour </th>
+echo"<th>  Initiator </th><th> Type </th><th> Topic</th><th> Favour </th>
 <th> Date </th><th> Time </th> <th>Join Now</th>";
+$topic1="";
+$topic2="";
 
 while ($row=mysqli_fetch_array($rs)) 
-{
-	echo"<tr> <td class='initiator'> $row[init_user] </td><td> $row[eventtype] </td><td> $row[name1] </td><td>$row[name2]</td>
+{	$topic1= $row['name1'];
+	$topic2= $row['name2'];
+	$topic=$topic1." vs ".$topic2;
+	echo"<tr> <td class='initiator'> $row[init_user] </td><td> $row[eventtype] </td><td> $topic </td>
 	 <td> $row[favour] </td><td class='date'> $row[date] </td><td class='time'> $row[time] </td> 
 	<td> <input type='button'  id=$row[id] value='Join'  class='join'> </td> </tr>   ";
 }
