@@ -1,23 +1,22 @@
 <?php 
-//require_once('../config.inc.php');
+require('../include/config.inc.php');
 $return_arr =   [];
 
-$conn   =   mysql_connect("localhost","root","");
+$conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
 if ($conn)
 {
-mysql_select_db('tosscall');
 //$sql    =   "SELECT id, name FROM `city` WHERE status=1 AND state_id=2;";
 //$sql    =   "SELECT id ,name FROM state WHERE status=1;";
 //$sql    =   "SELECT id, name FROM event WHERE status=1;";
 $sql    =   "SELECT id, name FROM eventtype WHERE status=1;";
-$result =   mysql_query($sql);
+$result =   mysqli_query($conn,$sql);
 if (!$result)
 {
-    die("Could not get data: ".mysql_error());
+    die("Could not get data: ".mysqli_error());
     exit();
 
 }
-while ($row[] =   mysql_fetch_assoc($result))
+while ($row[] =   mysqli_fetch_assoc($result))
 {
     $return_arr =   $row;
  

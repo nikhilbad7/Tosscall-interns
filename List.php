@@ -1,42 +1,116 @@
 <html>
-	<head>
-		<title>List</title>
-	</head>
-	<body>
-		<h1 align="center">List page</h1>
-		<form>
-		<label>Select Type</label>&nbsp;&nbsp;&nbsp;
-		<select>
-				<option value="politics">Politics</option>
-				<option value="bollywood">Bollywood</option>
-				<option value="hollywood">Hollywood</option>
-				<option value="sports">Sports</option>
-		</select><br/><br/>
-		<label>Select State</label>&nbsp;&nbsp;
-    		<select id="state">
-    		<script type="text/javascript">
-    		var handles = ["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Dadra and Nagar Haveli","Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Puducherry","Punjab", "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"];
-    			var options="";
-    			for(i=0;i<handles.length;i++){
-    				options+='<option value="' + handles[i] + '">' + handles[i] + '</option>';
-    			}
-    			document.getElementById('state').innerHTML=options;
-    		</script>
-    		</select>
-    		<br/><br/>
-    		<label>Select City</label>&nbsp;&nbsp;&nbsp;
-    		<select></select><br/><br/>
-    		<input type="submit" value="Submit">
-    	</form>
-    	<hr>
-    	<table width="500px">
-    		<th>Type</th>
-    		<th>Topic</th>
-    		<th>Your Name</th>
-    		<th>Opponent</th>
-    		<th>Date</th>
-    		<th>Time</th>
-    		<th>Notification</th>
-    	</table>
-	</body>
+    <head>
+        <script type="text/javascript" src="jquery.min.js"></script>
+    </head>
+<body>
+<div>
+<select id="state_select"><option selected hidden value="">Choose Your State</option></select>
+<select id="city_select"><option selected hidden value="">Choose Your City<option></select>
+<select id="type_select"><option selected hidden value="">Choose Your Topic</option></select>
+<button id="fetchBtn">View</button>
+</div>
+<div>Upcoming Events</div>
+<div><table id="upcoming_event" border="1px">
+    <thead>
+    <tr>
+		<th>Topic</th>
+        <th>Initiater</th>
+        <th>Accepter</th>
+        <th>Start Date</th>
+        <th>Start Time</th>
+    </tr>
+
+</thead>
+    <tbody></tbody>
+</table>
+</div>
+    <script>
+        var cleanedData = null;
+        function fetchData(ajax_page,args)
+            {
+                $.ajax({
+                    async:false,
+                    url: ajax_page,
+                    Type: "json",
+                    data:args,
+                    success: function(data){
+                        try{
+                        cleanedData = JSON.parse(data);
+                        }
+                        catch(e)
+                        {
+                            cleanedData = {};
+                        }
+                    }
+                });
+                return cleanedData;
+            }
+        function optionParser(select_element,data,class_value)
+        {
+            option_str  =   null;
+            for(i=0;i<data.length;i++)
+                        {
+                            option_str  = "<option class='";
+                            option_str  += class_value + "'>";
+                            option_str  += data[i]['name'];
+                            option_str  += "</option>"
+                            $(select_element).append(option_str);
+                        }
+
+        }
+        function printEventDetails(tab_id,status=1)// status = 0 (unavailable), 1 (available),2 (accepted), 3 (live),4 (over)
+        {
+            var tr_str='';
+            var city = $("#city_select").val();
+            var type= $("#type_select").val();
+            data = fetchData("ajax_calls/ajax_event.php",{'city':city,'eventtype':type,'status':status});
+            for(i=0;i<data.length;i++)
+            {
+                tr_str += '<tr>';
+                tr_str += '<td>'+data[i]['topic']+'</td>';
+                tr_str += '<td>'+data[i]['init_user']+'</td>';
+                tr_str += '<td>'+data[i]['acce_user']+'</td>';
+                tr_str += '<td>'+data[i]['date']+'</td>';
+                tr_str += '<td>'+data[i]['time']+'</td>';
+				tr_str +='<td><button id="notifyBtn_'+data[i]['id']+'">Notify Me</button></td>';
+                tr_str += '</tr>';
+            }
+            $(tab_id + " tbody").empty().append(tr_str);
+        }
+        function getData()
+        {
+            printEventDetails("#upcoming_event",2);
+        }
+        function selectChanger(select_element,ajax_page,args={},class_value='')
+        {
+           parsedData   = fetchData(ajax_page,args);
+           if (parsedData != null)
+           {
+            optionParser(select_element,parsedData,class_value);
+
+           }
+        }
+		function notifySubscribe()
+		{
+			$(this).value
+
+		}
+        function init()
+        {
+            selectChanger("#state_select","ajax_calls/ajax_states.php");
+            $("#state_select").change(function()
+            {
+                var state = $("#state_select").val();
+                $("#city_select").empty();
+                selectChanger("#city_select","ajax_calls/ajax_cities.php",{'state': state});
+            });
+            
+            selectChanger("#type_select","ajax_calls/ajax_eventtype.php");
+            $("#fetchBtn").click(getData);
+			$(".notifyBtn").click(notifySubscribe);
+
+        }
+        $(document).ready(init);
+    </script>
+</body> 
 </html>

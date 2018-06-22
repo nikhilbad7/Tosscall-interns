@@ -100,7 +100,7 @@
         {
            parsedData   = fetchData(ajax_page,args);
            if (parsedData != null)
-           {     
+           {
             optionParser(select_element,parsedData,class_value);
 
            }
