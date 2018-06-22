@@ -10,7 +10,7 @@ $returnArray = [];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
 if ($conn)
 {
-$sql    =   "SELECT id,topic, init_user, acce_user, date, time FROM event WHERE ";
+$sql    =   "SELECT id,name1,name2, init_user, acce_user, date, time FROM event WHERE ";
 $sql .= "city='".$city."' and ";
 $sql .= "eventtype='".$eventtype."' and ";
 $sql .= "status='".$status."';";

@@ -67,7 +67,7 @@
             for(i=0;i<data.length;i++)
             {
                 tr_str += '<tr>';
-                tr_str += '<td>'+data[i]['topic']+'</td>';
+                tr_str += '<td>'+data[i]['name1']+' Vs. '+data[i]['name2']+'</td>';
                 tr_str += '<td>'+data[i]['init_user']+'</td>';
                 tr_str += '<td>'+data[i]['acce_user']+'</td>';
                 tr_str += '<td>'+data[i]['date']+'</td>';
