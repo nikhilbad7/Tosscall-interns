@@ -46,7 +46,7 @@ echo "<script>window.location='login.php'</script>";
 						}
 						elseif ($current_date == $r['date']) {
 								$time= $r['time'];
-								if($current_time>$time){
+								if($current_time<$time){
 									$topic1= $r['name1'];
 									$topic2= $r['name2'];
 									$topic=$topic1." vs ".$topic2;
