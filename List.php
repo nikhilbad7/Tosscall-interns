@@ -3,6 +3,17 @@
         <script type="text/javascript" src="jquery.min.js"></script>
     </head>
 <body>
+    <ul>
+            <li><a href="start.php">Start</a></li>
+            <li><a href="Home.php">Home</a></li>
+            <li><a href="Watch.php">Watch</a></li>
+            <li><a href="select1.php">Select</a></li>
+            <li><a href="#">Notification</a></li>
+            <li><a href="Discussionlist.php">MyDiscussion</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+<hr>
+
 <div>
 <select id="state_select"><option selected hidden value="">Choose Your State</option></select>
 <select id="city_select"><option selected hidden value="">Choose Your City<option></select>
@@ -18,6 +29,7 @@
         <th>Accepter</th>
         <th>Start Date</th>
         <th>Start Time</th>
+        <th>Notification</th>
     </tr>
 
 </thead>
