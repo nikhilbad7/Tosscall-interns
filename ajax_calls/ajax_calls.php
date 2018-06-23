@@ -37,11 +37,9 @@ function queryMaker($params_data)
 function fetchDataFromServer($query)
 {
     $resultJson ={};
-    $conn   =   mysql_connect($db_host,$db_username,$db_password);
+    $conn   =   mysql_connect($db_host,$db_username,$db_password,$db_name);
     if ($conn)
     {
-        mysql_select_db($db_name);
-        
         $result =   mysql_query($sql);
         if ($result)
         {

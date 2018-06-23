@@ -32,6 +32,29 @@
         </div>
     </body>
     <script>
+        function fetchData(ajax_page,args)
+            {
+                $.ajax({
+                    async:false,
+                    url: ajax_page,
+                    Type: "json",
+                    data:args,
+                    success: function(data){
+                        try{
+                        cleanedData = JSON.parse(data);
+                        }
+                        catch(e)
+                        {
+                            cleanedData = {};
+                        }
+                    }
+                });
+                return cleanedData;
+            }
+        getMessages($user,$event)
+        {
+
+        }
         
     </script>
 </html>

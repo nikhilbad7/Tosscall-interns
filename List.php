@@ -64,6 +64,7 @@
             var city = $("#city_select").val();
             var type= $("#type_select").val();
             data = fetchData("ajax_calls/ajax_event.php",{'city':city,'eventtype':type,'status':status});
+            console.log(data);
             for(i=0;i<data.length;i++)
             {
                 tr_str += '<tr>';
@@ -72,7 +73,7 @@
                 tr_str += '<td>'+data[i]['acce_user']+'</td>';
                 tr_str += '<td>'+data[i]['date']+'</td>';
                 tr_str += '<td>'+data[i]['time']+'</td>';
-				tr_str +='<td><button id="notifyBtn_'+data[i]['id']+'">Notify Me</button></td>';
+				tr_str +='<td><button id="notifyBtn_'+data[i]['id']+'" onclick="notifySubscribe('+data[i]['id']+')">Notify Me</button></td>';
                 tr_str += '</tr>';
             }
             $(tab_id + " tbody").empty().append(tr_str);
@@ -90,11 +91,28 @@
 
            }
         }
-		function notifySubscribe()
+		function notifySubscribe(eventId)
 		{
-			$(this).value
-
+			user = getCookie("username");
+            fetchData("ajax_calls/ajax_notify.php",{'event_id':eventId,'user':user});
+            alert("subscribed");
+            console.log("#notifyBtn_"+eventId);
+            $("#notifyBtn_"+eventId).prop("disabled",true);
 		}
+        function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
         function init()
         {
             selectChanger("#state_select","ajax_calls/ajax_states.php");
@@ -107,7 +125,6 @@
             
             selectChanger("#type_select","ajax_calls/ajax_eventtype.php");
             $("#fetchBtn").click(getData);
-			$(".notifyBtn").click(notifySubscribe);
 
         }
         $(document).ready(init);

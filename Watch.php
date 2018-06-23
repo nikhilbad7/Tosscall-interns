@@ -93,6 +93,7 @@
         }
         function getData()
         {
+            
             printEventDetails("#live_event",3);
             printEventDetails("#over_event",4);
         }
