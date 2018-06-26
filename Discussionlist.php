@@ -24,7 +24,7 @@ echo "<script>window.location='login.php'</script>";
 			<li><a href="logout.php">Logout</a></li>
 		</ul>
 		<hr>
-		<p>Upcoming Discussions</p>
+		
 		<div>
 					<?php
 					$status_of_user=1;
@@ -67,6 +67,15 @@ echo "<script>window.location='login.php'</script>";
 					$query2="select * from event where  (init_user='$username' or acce_user='$username') and status =2 ";
 					$rs=mysqli_query($c,$query2);
 					if($rs){
+						$count =0;
+						while($r=mysqli_fetch_array($rs)){
+							++$count;
+						}
+						if($count == 0){
+						echo "<h1>No discussions</h1>";
+						}
+						elseif($count!=0){
+							echo "<p>Upcoming Discussions</p>";
 					echo "<table border=1><th>Event Type</th><th>Topic</th><th>Favour</th><th>Initiator</th><th>Acceptor</th><th>Date</th><th>Time</th><th>City</th>";
 					while($r=mysqli_fetch_array($rs)){
 						$id_of_user = $r['id'];
@@ -87,11 +96,14 @@ echo "<script>window.location='login.php'</script>";
 								elseif($current_time >= $time){
 									$status_of_user =3; //live-
 									ajax_request($status_of_user,$id_of_user);
+									location.reload();
 										}												
 						}	
 					}
+				}
 					echo "</table>"; }
-					$query3="select * from event where  (init_user='$username' or acce_user='$username') and status =3 ";
+					
+										$query3="select * from event where  (init_user='$username' or acce_user='$username') and status =3 ";
 					$rs=mysqli_query($c,$query3);
 					if($rs){
 						while($r=mysqli_fetch_array($rs)){
@@ -102,6 +114,7 @@ echo "<script>window.location='login.php'</script>";
 						if($finalTime <= $current_time){	
 				  						$status_of_user =4; //Discussion completed and Time over
 				  						ajax_request($status_of_user,$id_of_user);
+				  						location.reload();
 				  					}
 				  				}
 					}
