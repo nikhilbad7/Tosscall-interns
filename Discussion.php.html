@@ -23,8 +23,7 @@
 
                     </div>
                     <!--Like-->
-                    <div>
-                        
+                    <div>   
                     </div>
                 </div>
 
@@ -51,10 +50,9 @@
                 });
                 return cleanedData;
             }
-        getMessages($user,$event)
+        getMessages(user,eventId)
         {
-
+            fetchData("ajax_calls/ajax_messages.php",{'user':user,'event_id':event,'date_time':});
         }
         
-    </script>
 </html>

@@ -1,0 +1,66 @@
+<head>
+    <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<!--Message Panel-->
+<div id="message-panel">
+            
+            <!--Message-->
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+
+</div>
+<script>
+    var cleanedData = null;
+        function fetchData(ajax_page,args)
+            {
+                $.ajax({
+                    async:false,
+                    url: ajax_page,
+                    Type: "json",
+                    data:args,
+                    success: function(data){
+                        try{
+                        cleanedData = JSON.parse(data);
+                        }
+                        catch(e)
+                        {
+                            cleanedData = {};
+                        }
+                    }
+                });
+                return cleanedData;
+            }
+            function currentDate()
+            {
+                var today = new Date();
+                return(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
+            }
+            function currentTime()
+            {
+                var today = new Date();
+                return(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
+            }
+            function messageFetcher()
+            {
+                fetchData("ajax_calls/ajax_messages.php",{'event_id':event,'date_time':currentDate()+''+currentTime()});
+
+            }
+            function messageSender(message)
+            {
+                currentDate = currentDate();
+                currentTime = currentTime();
+                if((message != null) || (message != ''))
+                {
+                    
+                fetchData("ajax_calls/ajax_messages_receiver.php",{'event_id':event,'date':currentDate(),'time':currentTime(),'message':message});
+                }
+            }
+            function init()
+            {
+            }
+            $(document).ready(init);
+            </script>
