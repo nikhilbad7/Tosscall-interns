@@ -9,7 +9,7 @@ echo "<script>window.location='login.php'</script>";
 
 $c=mysqli_connect('localhost','root','','tosscall_db');
 
-$query="select * from event where init_user='$username' or acce_user='$username' and status=3";
+$query="select * from event where ((init_user='$username') or (acce_user='$username')) and (status=3)";
 
 $rs=mysqli_query($c,$query);
 
@@ -17,13 +17,13 @@ if ($rs)
 {
     $row=mysqli_fetch_array($rs);
 
-    if ($row[favour]=$row[name1]) 
+    if ($row['favour']=$row['name1']) 
     {
-        $against=$row[name2];
+        $against=$row['name2'];
     }
     else
     {
-        $against=$row[name1];
+        $against=$row['name1'];
     }
 }
 
@@ -55,7 +55,7 @@ echo "<script>window.location='home.php'</script>"
     <script type="text/javascript">
             
 
-    var m=29,s=59,t=0;
+    var m=29,s=59,s2=59,t=0;
     
     var x=setInterval(function()
     {
@@ -63,17 +63,18 @@ echo "<script>window.location='home.php'</script>"
      document.getElementById("msg").innerHTML="Time Left : "+m+":"+s;
      s--;
 
+     if(m==0 && s==-1)
+     {         
+        alert("Discussion Over");
+        clearInterval(x);
+        window.location="Home.php";
+        
+     }
+
      if(s==-1)
      {
         s=59;
         m--;
-     }
-
-     if(m==0 && s==0)
-     {         
-        alert("Discussion Over");
-        window.location="Home.php";
-        clearInterval(x);
      }
 
 
@@ -90,11 +91,11 @@ echo "<script>window.location='home.php'</script>"
     var y=setInterval(function()
     {
       
-     document.getElementById("time").innerHTML="Your Turn [ "+t+":"+s+" ] " ;
+     document.getElementById("time").innerHTML="Your Turn [ "+t+":"+s2+" ] " ;
      s--;
 
      
-     if(s==0)
+     if(s2==0)
      {          
         clearInterval(y);
         document.getElementById("time").innerHTML="Wait for Your Turn";
