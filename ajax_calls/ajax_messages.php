@@ -1,9 +1,10 @@
 
 <?php 
 require('../include/config.inc.php');
-if($_SERVER['REQUEST_METHOD']=='POST' && isset($_SESSION['username'])&& isset($_REQUEST['event_id'])&& isset($_REQUEST['date_time']))
+if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['event_id'])&& isset($_REQUEST['date_time']))
 {
-    $user = $_SESSION['username'];
+    //$user = $_SESSION['username'];
+    $user = 'poonam';
     $eventId = $_REQUEST['event_id'];
     $dateTime = $_REQUEST['date_time'];
 $returnArray = [];
@@ -14,8 +15,7 @@ if ($conn)
 $sql    =   "SELECT id, user, message, date, time FROM message WHERE status=1 and event_id=";
 $sql    .= $eventId." and concat(date,' ',time) < ";
 $sql    .= "'".$dateTime."' and not user =";
-$sql    .= "'".$user."';";
-echo $sql;
+$sql    .= "'".$user."' ORDER BY date DESC ,time DESC;";
 $result =   mysqli_query($conn,$sql);
 if ($result)
 {
