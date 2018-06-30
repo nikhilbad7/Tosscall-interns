@@ -29,7 +29,7 @@ if ($rs)
 
 else
 {
-echo "<script>window.location='home.php'</script>"
+echo "<script>window.location='home.php'</script>";
 }
 
 ?>

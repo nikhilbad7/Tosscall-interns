@@ -5,9 +5,6 @@ $return_arr =   [];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
 if ($conn)
 {
-//$sql    =   "SELECT id, name FROM `city` WHERE status=1 AND state_id=2;";
-//$sql    =   "SELECT id ,name FROM state WHERE status=1;";
-//$sql    =   "SELECT id, name FROM event WHERE status=1;";
 $sql    =   "SELECT id, name FROM eventtype WHERE status=1;";
 $result =   mysqli_query($conn,$sql);
 if (!$result)

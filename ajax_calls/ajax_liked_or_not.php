@@ -5,8 +5,7 @@ $result =0;
 $liked = 0;
 if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['message_id']))
 {
-    $user ='poonam';
-    //$user = $_SESSION['username'];
+    $user = $_SESSION['username'];
     $messageId = $_REQUEST['message_id'];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
   $sql = "SELECT id FROM likes WHERE message_id =$messageId AND liker_user='".$user."' LIMIT 1;";

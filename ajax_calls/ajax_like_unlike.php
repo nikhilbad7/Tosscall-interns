@@ -3,8 +3,7 @@
 require('../include/config.inc.php');
 if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['message_id'])&& isset($_REQUEST['date']) && isset($_REQUEST['time']) && isset($_REQUEST['like_status']))
 {
-    $user ='poonam';
-    //$user = $_SESSION['username'];
+    $user = $_SESSION['username'];
     $messageId = $_REQUEST['message_id'];
     $date = $_REQUEST['date'];
     $time = $_REQUEST['time'];

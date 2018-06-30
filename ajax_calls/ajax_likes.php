@@ -3,8 +3,7 @@
 require('../include/config.inc.php');
 if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['message_id']))
 {
-    //$user = $_SESSION['username'];
-    $user = 'poonam';
+    $user = $_SESSION['username'];
     $messageId = $_REQUEST['message_id'];
 $returnArray = [];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);

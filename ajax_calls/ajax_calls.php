@@ -4,11 +4,11 @@ $notAllowed = ["status","*"];
 if(isset($_POST['req']))
 {
     $params = $_POST;
-    $_POST['data'] = 
+    $_POST['data'] = '';
     switch($params['req'])
     {
         case 'state':
-                        $query = "SELECT name from "
+                        $query = "SELECT name from ";
 
         break;
         case 'city':
@@ -21,7 +21,7 @@ if(isset($_POST['req']))
 }
 function dataValidater($str)
 {
-    if()
+    if(1)
     {
         //
         return TRUE;        
@@ -36,7 +36,7 @@ function queryMaker($params_data)
 
 function fetchDataFromServer($query)
 {
-    $resultJson ={};
+    $resultJson =[];
     $conn   =   mysql_connect($db_host,$db_username,$db_password,$db_name);
     if ($conn)
     {
@@ -51,4 +51,4 @@ function fetchDataFromServer($query)
     }
     return json_encode($resultJson);
 }
-?>_POST$conn   =   mysql_connect($db_host,$db_username,$db_password);
+?>
