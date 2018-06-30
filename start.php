@@ -1,6 +1,10 @@
 <?php
 session_start();
 $username=$_SESSION['username'];
+require('include/testdate.php');
+$current_date=date("Y-m-d");
+$NewDate=date('Y-m-d', strtotime("+7 days"));
+
 if(!isset($_SESSION['username']))
 {
 echo "<script>window.location='login.php'</script>";
@@ -21,8 +25,14 @@ echo "<script>window.location='login.php'</script>";
 			<li><a href="logout.php">Logout</a></li>
 		</ul>
 		<?php
+			$msg=array();
 			if(isset($_POST['initiate']))
-			{
+			{		$i=0;
+				if(empty($_POST['selecttype']) || empty($_POST['first']) || empty($_POST['second'])|| empty($_POST['favour']) || empty($_POST['dd']) || empty($_POST['t']) || empty($_POST['selectedstate']) ||  empty($_POST['selectedcity']))
+				{
+					$msg[$i]="Please full fill all requirement";
+					++$i;
+				}
 					$selectedtype = $_POST['selecttype'];
 					$topic1 = $_POST['first'];
 					$topic2 = $_POST['second'];
@@ -32,10 +42,17 @@ echo "<script>window.location='login.php'</script>";
 					$favour = $_POST['favour'];
 					$date = $_POST['dd'];
 					$time = $_POST['t'];
+					//$timeout = strtotime("+30 minutes", strtotime("$time"));
+					$combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
+
+					$timeout = date('Y-m-d H:i:s', strtotime("+30 minutes", strtotime("$combinedDT")));
+
+
 					$state = $_POST['selectedstate'];
 					$city = $_POST['selectedcity'];
 					$c=mysqli_connect('localhost','root','','tosscall_db');
-    				$query = "insert into  event (name1,name2,eventtype,favour,date,time,init_user,city) values ('$topic1','$topic2','$selectedtype','$favour','$date','$time','$username','$city') ";
+    				$query = "insert into  event (name1,name2,eventtype,favour,date,time,init_user,city,mergedatetime,timeout) values ('$topic1','$topic2','$selectedtype','$favour','$date','$time','$username','$city','$combinedDT','$timeout') ";
+    				
     				$rs = mysqli_query($c,$query);
     				if($rs){
     					echo "<script>alert('inserted')</script>";
@@ -45,7 +62,6 @@ echo "<script>window.location='login.php'</script>";
     					echo "<script>alert('error in inserting')</script>";
     				}
 			}
-
 		?>
 		<h1>Welcome to Start Page</h1>
 		<form method="post">
@@ -66,15 +82,45 @@ echo "<script>window.location='login.php'</script>";
 			</select>
 			<br/><br/>
 			<label>Topic</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text" name="first" id="fir">&nbsp;&nbsp;VS
-			<input type="text" name="second" id="sec"> &nbsp;&nbsp;&nbsp;
+			<input type="text" name="first" id="fir" onfocus="onenter()" onfocusout="onleave(1)">&nbsp;&nbsp;VS
+			<input type="text" name="second" id="sec" onfocus="onenter()" onfocusout="onleave(2)"> &nbsp;&nbsp;&nbsp;
 			<input type="button" value="Done" onclick="topicdecided()">
 			<br/><br/>
 			<label>Favour</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<select id="favour" name="favour"></select>
 				<script>
+					function currentdate(){
+						//console.log("nikhil");
+					var current_date = "<?php echo $current_date;?>";
+					var afterweekdate = "<?php echo $NewDate;?>";
+					
+					//console.log(current_date);
+					//return current_date;
+					document.getElementById('date').setAttribute('min',current_date);
+					document.getElementById('date').setAttribute('max',afterweekdate);
+
+					}
+					function onenter(){
+							document.getElementById("fir").style.color = "green";
+					}
+					function onleave(n){
+						if(n==1){
+							var topic1= document.getElementById("fir").value;
+							var length1 = topic1.length;
+							if(length1==0){
+								alert("please fill the topic1");
+							}
+						}
+						if(n==2){
+							var topic2= document.getElementById("sec").value;
+							var length2 = topic2.length;
+							if(length2==0){
+								alert("please fill the topic2");
+							}
+						}
+					}
 					var count=1;
-				function topicdecided(){
+					function topicdecided(){
 					
 					if(count==1){
 					var first=document.getElementById('fir').value;
@@ -93,7 +139,7 @@ echo "<script>window.location='login.php'</script>";
 				</script>
 			<br/><br/>
 			<label>Select Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    		<input type="date" name="dd"><br/><br/>
+    		<input type="date" id = "date" name="dd" min="" max="" onclick="currentdate()" ><br/><br/>
     		<label>Select Time</label>&nbsp;&nbsp;&nbsp;&nbsp;
     		<input type="time" name="t"><br/><br/>
     		<label>Select State</label>&nbsp;&nbsp;
@@ -132,7 +178,8 @@ echo "<script>window.location='login.php'</script>";
     			}
     		</script>
     		</select><br/><br/>
-    		<input type="submit" value="Submit" name="initiate">
+    		<!--<input type="datetime-local" name="dt"> -->
+    		<input type="submit" value="Submit"  name="initiate">
     	</form>
 	</body>
 </html>

@@ -96,7 +96,7 @@ echo "<script>window.location='login.php'</script>";
 								elseif($current_time >= $time){
 									$status_of_user =3; //live-
 									ajax_request($status_of_user,$id_of_user);
-									location.reload();
+									echo "<script>window.location='Discussion.php'</script";
 										}												
 						}	
 					}
@@ -114,7 +114,7 @@ echo "<script>window.location='login.php'</script>";
 						if($finalTime <= $current_time){	
 				  						$status_of_user =4; //Discussion completed and Time over
 				  						ajax_request($status_of_user,$id_of_user);
-				  						location.reload();
+				  						echo "<script> location.reload() </script>";
 				  					}
 				  				}
 					}
