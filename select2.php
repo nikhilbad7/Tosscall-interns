@@ -1,16 +1,12 @@
 <?php 
-session_start();
-$username=$_SESSION['username'];
+require('include/config.inc.php');
+require('include/session.inc.php');
 $current_date=date("Y-m-d");
 $mydatetime  = [];
 $i =0;
-if(!isset($_SESSION['username']))
-		{
-		echo "<script>window.location='login.php'</script>";
-		}
 $type=$_REQUEST["k1"];
 $city=$_REQUEST["k2"];
-$c=mysqli_connect('localhost','root','','tosscall_db');
+$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
 $query1 = "select * from event where  init_user='$username' and status = 1";
 $rs=mysqli_query($c,$query1);
 if($rs){

@@ -1,29 +1,17 @@
 <?php
-session_start();
-$username=$_SESSION['username'];
+require('include/config.inc.php');
+require('include/session.inc.php');
+require('include/header.inc.php');
 require('include/testdate.php');
 $current_date=date("Y-m-d");
 $NewDate=date('Y-m-d', strtotime("+7 days"));
-
-if(!isset($_SESSION['username']))
-{
-echo "<script>window.location='login.php'</script>";
-}
 ?>
 <html>
 	<head>
 		<title>Start Topic</title>
 	</head>
 	<body>
-		<ul>
-			<li><a href="home.php">Home</a></li>
-			<li><a href="select1.php">Select</a></li>
-			<li><a href="Watch.php">Watch</a></li>
-			<li><a href="List.php">List</a></li>
-			<li><a href="#">Notification</a></li>
-			<li><a href="Discussionlist.php">MyDiscussion</a></li>
-			<li><a href="logout.php">Logout</a></li>
-		</ul>
+		<?php showNav(); ?>
 		<?php
 			$msg=array();
 			if(isset($_POST['initiate']))
@@ -36,7 +24,7 @@ echo "<script>window.location='login.php'</script>";
 					$selectedtype = $_POST['selecttype'];
 					$topic1 = $_POST['first'];
 					$topic2 = $_POST['second'];
-    				$c=mysqli_connect('localhost','root','','tosscall_db');
+    				$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
     				$query = "insert into topic (name1,name2) values ('$topic1','$topic2')";
     				$rs = mysqli_query($c,$query);
 					$favour = $_POST['favour'];
@@ -50,7 +38,7 @@ echo "<script>window.location='login.php'</script>";
 
 					$state = $_POST['selectedstate'];
 					$city = $_POST['selectedcity'];
-					$c=mysqli_connect('localhost','root','','tosscall_db');
+					$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
     				$query = "insert into  event (name1,name2,eventtype,favour,date,time,init_user,city,mergedatetime,timeout) values ('$topic1','$topic2','$selectedtype','$favour','$date','$time','$username','$city','$combinedDT','$timeout') ";
     				
     				$rs = mysqli_query($c,$query);
@@ -68,7 +56,7 @@ echo "<script>window.location='login.php'</script>";
 			<label>Select Type:</label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<select name="selecttype" >
 				<?php
-    				$c=mysqli_connect('localhost','root','','tosscall_db');
+    				$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
     				$query = "select * from eventtype";
     				$rs = mysqli_query($c,$query);
     				while($row=mysqli_fetch_array($rs))

@@ -28,7 +28,7 @@ $username=$_GET["x"];
 $password=$_GET["y"];
 
 
-$c=mysqli_connect('localhost','root','','tosscall_db');
+$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
 
 $q="select * from login where username='$username' and password='$password'"; 
 

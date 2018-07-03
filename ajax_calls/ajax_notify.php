@@ -1,6 +1,7 @@
 
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 if(isset($_GET['event_id'])&&isset($_GET['user']))
 {
 $event_id = $_GET['event_id'];

@@ -1,5 +1,6 @@
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 $notAllowed = ["status","*"];
 if(isset($_POST['req']))
 {

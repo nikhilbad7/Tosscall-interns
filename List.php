@@ -1,17 +1,13 @@
+<?php
+require('include/config.inc.php');
+require('include/session.inc.php');
+require('include/header.inc.php');
+?>
 <html>
     <head>
         <script type="text/javascript" src="jquery.min.js"></script>
     </head>
-<body>
-    <ul>
-            <li><a href="start.php">Start</a></li>
-            <li><a href="Home.php">Home</a></li>
-            <li><a href="Watch.php">Watch</a></li>
-            <li><a href="select1.php">Select</a></li>
-            <li><a href="#">Notification</a></li>
-            <li><a href="Discussionlist.php">MyDiscussion</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
+<body><?php showNav(); ?>
 <hr>
 
 <div>

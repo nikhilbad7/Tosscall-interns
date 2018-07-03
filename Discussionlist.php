@@ -1,28 +1,18 @@
 <?php
-session_start();
+require('include/config.inc.php');
+require('include/session.inc.php');
+require('include/header.inc.php');
 require('include/testdate.php');
 $current_time=date("H:i:s");
 $current_date=date("Y-m-d");
 $username=$_SESSION['username'];
-if(!isset($_SESSION['username']))
-{
-echo "<script>window.location='login.php'</script>";
-}
 ?>
 <html>
 	<head>
 		<title>Discussion List</title>
 	</head>
 	<body>
-		<ul>
-			<li><a href="start.php">Start</a></li>
-			<li><a href="Home.php">Home</a></li>
-			<li><a href="Watch.php">Watch</a></li>
-			<li><a href="List.php">List</a></li>
-			<li><a href="#">Notification</a></li>
-			<li><a href="select1.php">Select</a></li>
-			<li><a href="logout.php">Logout</a></li>
-		</ul>
+		<?php showNav(); ?>
 		<hr>
 		
 		<div>
@@ -43,7 +33,7 @@ echo "<script>window.location='login.php'</script>";
 				  					xhttp.send(); 
 				  					</script>";
 					}
-					$c=mysqli_connect('localhost','root','','tosscall_db');
+					$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
 					$query1 =" select * from event where (acce_user  IS  NULL) and (status = 1)";
 					$rs1=mysqli_query($c,$query1);
 					if($rs1){

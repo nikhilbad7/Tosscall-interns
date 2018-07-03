@@ -1,6 +1,7 @@
 
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 if(isset($_GET['city'])&&isset($_GET['eventtype'])&&isset($_GET['status']))
 {
 $city = $_GET['city'];

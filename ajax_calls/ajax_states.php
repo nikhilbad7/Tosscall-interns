@@ -1,6 +1,7 @@
 
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 $returnArray = [];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
 

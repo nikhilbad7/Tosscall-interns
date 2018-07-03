@@ -1,13 +1,8 @@
 <?php
-session_start();
-$username=$_SESSION['username'];
-if(!isset($_SESSION['username']))
-{
-echo "<script>window.location='login.php'</script>";
-}
-
-
-$c=mysqli_connect('localhost','root','','tosscall_db');
+require('include/config.inc.php');
+require('include/session.inc.php');
+require('include/header.inc.php');
+$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
 
 $query="select * from event where ((init_user='$username') or (acce_user='$username')) and (status=3)";
 

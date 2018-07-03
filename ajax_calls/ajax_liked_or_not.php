@@ -1,6 +1,7 @@
 
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 $result =0;
 $liked = 0;
 if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['message_id']))

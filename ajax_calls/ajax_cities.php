@@ -1,6 +1,7 @@
 
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 if(isset($_GET['state']))
 {
 $state = $_GET['state'];

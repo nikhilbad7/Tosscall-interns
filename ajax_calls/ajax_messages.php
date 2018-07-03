@@ -1,6 +1,7 @@
 
 <?php 
 require('../include/config.inc.php');
+require('../include/session.inc.php');
 if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['event_id'])&& isset($_REQUEST['date_time']))
 {
     //$user = $_SESSION['username'];

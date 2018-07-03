@@ -1,11 +1,7 @@
 <?php
-session_start();
-$username=$_SESSION['username'];
-if(!isset($_SESSION['username']))
-{
-echo "<script>window.location='login.php'</script>";
-}
-
+require('include/config.inc.php');
+require('include/session.inc.php');
+require('include/header.inc.php');
 ?>
 
 
@@ -15,15 +11,7 @@ echo "<script>window.location='login.php'</script>";
 	<script type="text/javascript" src="jquery.min.js"></script>
 </head>
 <body>
-	<ul>
-			<li><a href="start.php">Start</a></li>
-			<li><a href="Home.php">Home</a></li>
-			<li><a href="Watch.php">Watch</a></li>
-			<li><a href="List.php">List</a></li>
-			<li><a href="#">Notification</a></li>
-			<li><a href="Discussionlist.php">MyDiscussion</a></li>
-			<li><a href="logout.php">Logout</a></li>
-		</ul>
+<?php showNav() ?>
 <hr>
 
 
@@ -34,7 +22,7 @@ Type :<select name="type" id="type">
 
 <?php 
  
-$c=mysqli_connect('localhost','root','','tosscall_db');
+$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
 
 $query="select * from eventtype";
 
