@@ -34,7 +34,7 @@ $username=$_SESSION['username'];
 				  					xhttp.send(); 
 				  					</script>";
 					}
-					$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+					$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 					$query1 =" select * from event where (acce_user  IS  NULL) and (status = 1)";
 					$rs1=mysqli_query($c,$query1);
 					if($rs1){
@@ -87,7 +87,7 @@ $username=$_SESSION['username'];
 								elseif($current_time >= $time){
 									$status_of_user =3; //live-
 									ajax_request($status_of_user,$id_of_user);
-									echo "<script>window.location='Discussion.php'</script";
+									header('Location: Discussion.php');
 										}												
 						}	
 					}

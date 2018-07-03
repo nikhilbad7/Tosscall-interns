@@ -2,11 +2,11 @@
 <?php 
 require('../include/config.inc.php');
 require('../include/session.inc.php');
-if(isset($_GET['city'])&&isset($_GET['eventtype'])&&isset($_GET['status']))
+if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['city'])&&isset($_REQUEST['eventtype'])&&isset($_REQUEST['status']))
 {
-$city = $_GET['city'];
-$eventtype=$_GET['eventtype'];
-$status = $_GET['status'];
+$city = $_REQUEST['city'];
+$eventtype=$_REQUEST['eventtype'];
+$status = $_REQUEST['status'];
 $returnArray = [];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
 if ($conn)

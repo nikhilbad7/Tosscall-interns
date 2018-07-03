@@ -40,7 +40,7 @@ $username = $_SESSION['username'];
                 $.ajax({
                     async:false,
                     url: ajax_page,
-                    Type: "json",
+                    Type: "POST",
                     data:args,
                     success: function(data){
                         try{

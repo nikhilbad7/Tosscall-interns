@@ -2,9 +2,9 @@
 <?php 
 require('../include/config.inc.php');
 require('../include/session.inc.php');
-if(isset($_GET['state']))
+if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['state']))
 {
-$state = $_GET['state'];
+$state = $_REQUEST['state'];
 $returnArray = [];
 $conn   =   mysqli_connect($db_host,$db_username,$db_password,$db_name);
 if ($conn)

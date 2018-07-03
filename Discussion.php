@@ -158,7 +158,7 @@ echo "<script>window.location='home.php'</script>";
                 $.ajax({
                     async:false,
                     url: ajax_page,
-                    type:"post",
+                    type:"POST",
                     data:args,
                     success: function(data){
                         try{
