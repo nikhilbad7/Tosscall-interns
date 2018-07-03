@@ -1,6 +1,7 @@
 <?php 
 require('include/config.inc.php');
 require('include/session.inc.php');
+$username = $_SESSION['username'];
 $current_date=date("Y-m-d");
 $mydatetime  = [];
 $i =0;

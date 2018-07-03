@@ -2,6 +2,7 @@
 require('include/config.inc.php');
 require('include/session.inc.php');
 require('include/header.inc.php');
+$username = $_SESSION['username'];
 $c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
 
 $query="select * from event where ((init_user='$username') or (acce_user='$username')) and (status=3)";

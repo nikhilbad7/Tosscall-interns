@@ -1,7 +1,7 @@
 <?php
 function showNav()
 {
-    if (isset($username))
+    if (isset($_SESSION['username']))
     {
     
     echo '<div>

@@ -3,6 +3,7 @@ require('include/config.inc.php');
 require('include/session.inc.php');
 require('include/header.inc.php');
 require('include/testdate.php');
+$username = $_SESSION['username'];
 $current_date=date("Y-m-d");
 $NewDate=date('Y-m-d', strtotime("+7 days"));
 ?>

@@ -2,6 +2,7 @@
 require('include/config.inc.php');
 require('include/session.inc.php');
 require('include/header.inc.php');
+$username = $_SESSION['username'];
 ?>
 <html>
     <head>

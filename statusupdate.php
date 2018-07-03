@@ -2,6 +2,7 @@
 require('include/config.inc.php');
 require('include/session.inc.php');
 require('include/header.inc.php');
+$username = $_SESSION['username'];
 		$status_of_user=$_GET['status'];
 		$id_of_user = $_GET['id'];
 		$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
