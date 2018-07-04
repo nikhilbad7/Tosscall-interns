@@ -25,7 +25,7 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 					$selectedtype = $_POST['selecttype'];
 					$topic1 = $_POST['first'];
 					$topic2 = $_POST['second'];
-    				$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+    				$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
     				$query = "insert into topic (name1,name2) values ('$topic1','$topic2')";
     				$rs = mysqli_query($c,$query);
 					$favour = $_POST['favour'];
@@ -39,7 +39,7 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 
 					$state = $_POST['selectedstate'];
 					$city = $_POST['selectedcity'];
-					$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+					$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
     				$query = "insert into  event (name1,name2,eventtype,favour,date,time,init_user,city,mergedatetime,timeout) values ('$topic1','$topic2','$selectedtype','$favour','$date','$time','$username','$city','$combinedDT','$timeout') ";
     				
     				$rs = mysqli_query($c,$query);
@@ -57,7 +57,7 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 			<label>Select Type:</label>&nbsp;&nbsp;&nbsp;&nbsp;
 			<select name="selecttype" >
 				<?php
-    				$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+    				$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
     				$query = "select * from eventtype";
     				$rs = mysqli_query($c,$query);
     				while($row=mysqli_fetch_array($rs))
@@ -134,7 +134,7 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
     		<label>Select State</label>&nbsp;&nbsp;
     		<select id="stateselected" onchange="mystate()" name='selectedstate'>
     			<?php
-    				$c=mysqli_connect('localhost','root','','tosscall_db');
+    				$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
     				$query = "select * from state";
     				$rs = mysqli_query($c,$query);
     				while($row=mysqli_fetch_array($rs))

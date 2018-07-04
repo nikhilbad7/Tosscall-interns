@@ -7,7 +7,7 @@ $mydatetime  = [];
 $i =0;
 $type=$_REQUEST["k1"];
 $city=$_REQUEST["k2"];
-$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 $query1 = "select * from event where  init_user='$username' and status = 1";
 $rs=mysqli_query($c,$query1);
 if($rs){

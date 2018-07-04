@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('include/config.inc.php')
 ?>
 
 <html>
@@ -28,7 +29,7 @@ $username=$_GET["x"];
 $password=$_GET["y"];
 
 
-$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 
 $q="select * from login where username='$username' and password='$password'"; 
 
@@ -38,7 +39,7 @@ $rs=mysqli_query($c,$q);
 if($row=mysqli_fetch_array($rs))
 {
 	$_SESSION['username']=$username;	
-	echo"<script>window.location='home.php'</script>";
+	header('Location: home.php');
 	     
 }
 

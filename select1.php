@@ -23,7 +23,7 @@ Type :<select name="type" id="type">
 
 <?php 
  
-$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 
 $query="select * from eventtype";
 
@@ -46,7 +46,7 @@ City :<select name="city" id="city">
 
 <?php 
  
-$c=mysqli_connect('localhost','root','','tosscall_db');
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 
 $s1="select * from city ";
 
@@ -65,18 +65,6 @@ while($r1=mysqli_fetch_array($ck1))
 <input type="button" name="b1" id="b1" value="Show">
 
 <div id="x">
-	<!--<script type="text/javascript">
-		function join(){
-		alert($(this).id);	
-	var initiator = $(this).closest('tr').find('.initiator').text();
-	var date = $(this).closest('tr').find('.date').text();
-	var time = $(this).closest('tr').find('.time').text();
-	alert(initiator);
-	alert(date);
-	alert(time); 
-} 
-		
-	</script> -->
 </div>
 
 
@@ -97,24 +85,13 @@ $(document).ready(function(){
 
 		$("body").on("click",".join",function(){
 			var id=	$(this).attr("id");
-			//var initiator = $(this).attr('init_user');
-			//var date
 			$.post('opponent.php',{k3:id},function(data){
 				location.reload();
-				//$("#x").html(data);
 			});
 			
 		})
 	});
 
-	/*function join(this){
-	var initiator = $(this).closest('tr').find('.initiator').text();
-	var date = $(this).closest('tr').find('.date').text();
-	var time = $(this).closest('tr').find('.time').text();
-	alert(initiator);
-	alert(date);
-	alert(time);
-} */
 </script>
 </body>
 </html>
