@@ -102,14 +102,14 @@ echo "<script>window.location='home.php'</script>";
                 var message=$("#message_box").val();
                
 
-            $.post('ajax_message_reciever.php',{k1:message},function(data){
+            $.post('ajax_calls/ajax_message_reciever.php',{k1:message},function(data){
             	//alert(data);
                 //$(".b1").attr("disabled", true); 
                	$("#message_box").val('');
             	
             	});
 
-            $.post('live_update.php',{},function(data){
+            $.post('ajax_calls/ajax_live_update.php',{},function(data){
             		//alert(data);
 
 
@@ -129,7 +129,7 @@ echo "<script>window.location='home.php'</script>";
 
 	setInterval(function()
 	{
-		$.post('live_ck.php',{},function(data){
+		$.post('ajax_calls/ajax_live_ck.php',{},function(data){
 		
 			z=data;
 
@@ -165,7 +165,7 @@ echo "<script>window.location='home.php'</script>";
         s2=59,t=0;
        // $(".b1").hide();
         $(".b1").attr("disabled", true);
-        $.post('live_update.php',{},function(data){});
+        $.post('ajax_calls/ajax_live_update.php',{},function(data){});
         document.getElementById("time").innerHTML="Wait for Your Turn";
 
      }
@@ -190,7 +190,7 @@ echo "<script>window.location='home.php'</script>";
 
 	setInterval(function()
 	{
-		$.post('msg_fetch.php',{},function(data){
+		$.post('ajax_calls/ajax_msg_fetch.php',{},function(data){
 		$("#msg").html(data);
 		});
 
