@@ -1,5 +1,9 @@
 <?php
 session_start();
+require('include/config.inc.php');
+require('include/session.inc.php');
+require('include/header.inc.php');
+require('include/testdate.php');
 ?>
 
 <html>
@@ -28,7 +32,7 @@ $username=$_GET["x"];
 $password=$_GET["y"];
 
 
-$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 
 $q="select * from login where username='$username' and password='$password'"; 
 

@@ -23,7 +23,7 @@ Type :<select name="type" id="type">
 
 <?php 
  
-$c=mysqli_connect($db_host,$db_username,$db_passsord,$db_name);
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 
 $query="select * from eventtype";
 
