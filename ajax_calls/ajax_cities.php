@@ -2,7 +2,7 @@
 <?php 
 require('../include/config.inc.php');
 require('../include/session.inc.php');
-if($_SERVER['REQUEST_METHOD']=='POST' && isset($_REQUEST['state']))
+if(($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_REQUEST['state']))
 {
 $state = $_REQUEST['state'];
 $returnArray = [];

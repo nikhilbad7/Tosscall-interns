@@ -3,7 +3,6 @@ require('include/config.inc.php');
 require('include/session.inc.php');
 require('include/header.inc.php');
 require('include/testdate.php');
-$username = $_SESSION['username'];
 $current_time=date("H:i:s");
 $current_date=date("Y-m-d");
 $username=$_SESSION['username'];
@@ -102,10 +101,10 @@ $username=$_SESSION['username'];
 						$user_time = $r['time'];
 						$endTime = strtotime("+30 minutes", strtotime($user_time));
 						$finalTime = date('H:i:s', $endTime);
-						if($finalTime <= $current_time){	
+						if($finalTime >= $current_time){	
 				  						$status_of_user =4; //Discussion completed and Time over
 				  						ajax_request($status_of_user,$id_of_user);
-				  						echo "<script> location.reload() </script>";
+				  						//echo "<script> location.reload() </script>";
 				  					}
 				  				}
 					}

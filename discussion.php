@@ -1,42 +1,23 @@
-<?php 
-
-session_start();
-$username=$_SESSION['username'];
-if(!isset($_SESSION['username']))
+<?php require('../include/config.inc.php');
+require('../include/session.inc.php');
+$username = $_SESSION['username'];
+if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-echo "<script>window.location='login.php'</script>";
-}
-
-$c=mysqli_connect('localhost','root','','tosscall_db');
+$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 $query="select * from event where ((init_user='$username') or (acce_user='$username')) and (status=3)";
-
 $rs=mysqli_query($c,$query);
 
 if ($rs) 
 {
 	    $row=mysqli_fetch_array($rs);
-
 	    $_SESSION['event_id']=$row['id'];
-	    
-   
-/* echo "<input type='hidden' value='$row[id]' id='t1'>";
- 
- $query="select * from live where id=$row[id]";
-
-$rs2=mysqli_query($c,$query);
-
-	if (rs2)
- 	{
- 		$row2=mysqli_fetch_array($rs);
-	}
-*/
 }
 
 else
 {
-echo "<script>window.location='home.php'</script>";
+header('Location: Home.php');
 }
-
+}
  ?>
 
 
