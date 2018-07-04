@@ -1,7 +1,7 @@
-<?php require('../include/config.inc.php');
-require('../include/session.inc.php');
+<?php require('include/config.inc.php');
+require('include/session.inc.php');
 $username = $_SESSION['username'];
-if($_SERVER['REQUEST_METHOD'] === 'POST')
+if(isset($username))
 {
 $c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 $query="select * from event where ((init_user='$username') or (acce_user='$username')) and (status=3)";
@@ -15,7 +15,7 @@ if ($rs)
 
 else
 {
-header('Location: Home.php');
+header('Location: home.php');
 }
 }
  ?>
