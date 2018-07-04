@@ -1,8 +1,7 @@
 <?php require('include/config.inc.php');
 require('include/session.inc.php');
 $username = $_SESSION['username'];
-if(isset($username))
-{
+
 $c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
 $query="select * from event where ((init_user='$username') or (acce_user='$username')) and (status=3)";
 $rs=mysqli_query($c,$query);
@@ -10,14 +9,17 @@ $rs=mysqli_query($c,$query);
 if ($rs) 
 {
 	    $row=mysqli_fetch_array($rs);
-	    $_SESSION['event_id']=$row['id'];
+        if($row==0)
+        {
+            header('Location: home.php');
+        }
+        else
+        {
+        $_SESSION['event_id']=$row['id'];
+        }
 }
+	    
 
-else
-{
-header('Location: home.php');
-}
-}
  ?>
 
 
