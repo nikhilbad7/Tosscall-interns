@@ -26,8 +26,6 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 					$topic1 = $_POST['first'];
 					$topic2 = $_POST['second'];
     				$c=mysqli_connect($db_host,$db_username,$db_password,$db_name);
-    				$query = "insert into topic (name1,name2) values ('$topic1','$topic2')";
-    				$rs = mysqli_query($c,$query);
 					$favour = $_POST['favour'];
 					$date = $_POST['dd'];
 					$time = $_POST['t'];
@@ -36,7 +34,9 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 					//$timeout = strtotime("+30 minutes", strtotime("$time"));
 					$combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
 					$timeout = date('Y-m-d H:i:s', strtotime("+30 minutes", strtotime("$combinedDT")));
-					$query1 = "select * from event where ((init_user = '$username') or( acce_user ='$username')) and ( ( mergedatetime = '$combinedDT') and ( status =1 ))";
+					$beforetime = date('Y-m-d H:i:s', strtotime("-30 minutes", strtotime("$combinedDT")));
+					//echo "<script>console.log( 'Before date: " . $beforetime . "' );</script>";
+					$query1 ="select * from event where ((init_user = '$username') or( acce_user ='$username')) and ( '$combinedDT' BETWEEN '$beforetime' AND timeout)";
 					$rs1 = mysqli_query($c,$query1);
 					if($rs1){
 						$counter = 0;
@@ -45,7 +45,7 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 							++$counter;	
 						}
 						if($counter > 0){
-							echo "<script>alert(' you already have discussion on this date and time')</script>";
+							echo "<script>alert(' please change your time')</script>";
 							echo "<script> window.location='start.php'</script>";
 						}
 						if($counter == 0){
@@ -126,14 +126,35 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 						if(n==3){
 							var datecheck = document.getElementById('date').value;
 							if(datecheck.length == 0 ){
-								alert('please select a date');
+								console.log('please select a date');
 							}
-							else { 
-								document.getElementById('hide').style.visibility = "visible";
+							else{
+								var timecheck = document.getElementById('t').value;
+								var combinedatetime = datecheck + " " + timecheck;
+							//alert(datecheck);
+							//alert(timecheck);
+							//alert(combinedatetime);
+							var xhttp = new XMLHttpRequest();
+							xhttp.onreadystatechange = function() {
+								if (this.readyState == 4 && this.status == 200) {
+									var response = this.responseText.trim();
+									//alert(response);
+									if(response == 'false'){
+										console.log('please change your time');
+										}
+    								}
+  								};
+		 				    xhttp.open("GET","checkdatetime.php?combinedDT="+combinedatetime,true);
+		  					xhttp.send();
 							}
+
 						}
 						if(n==4){
 							var datecheck =document.getElementById('date').value;
+							if(datecheck.length==0){
+								console.log('please select a date first');
+							}
+							else{
 							var timecheck = document.getElementById('t').value;
 							var combinedatetime = datecheck + " " + timecheck;
 							//alert(datecheck);
@@ -145,13 +166,15 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 									var response = this.responseText.trim();
 									//alert(response);
 									if(response == 'false'){
-										alert('you already have discussion on this date and time');
+										console.log('please change your time');
 										}
     								}
   								};
 		 				    xhttp.open("GET","checkdatetime.php?combinedDT="+combinedatetime,true);
 		  					xhttp.send();
+		  					}
 						}
+						
 					}
 					var count=1;
 					function topicdecided(){
@@ -172,10 +195,9 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 				</script>
 			<br/><br/>
 			<label>Select Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    		<input type="date" id = "date" name="dd" min="" max="" onfocus="currentdate()" onfocusout="onleave(3)" ><br/><br/>
-    		<p id = "hide" style="visibility: hidden"; >
+    		<input type="date" id = "date" name="dd" min="" max="" onfocus="currentdate()" onblur="onleave(3)" ><br/><br/>
     		<label>Select Time</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    		<input type="time" id = "t" name="t" onfocusout="onleave(4)"><br/><br/> </p>
+    		<input type="time" id = "t" name="t"  onblur="onleave(4)"><br/><br/>
     		<label>Select State</label>&nbsp;&nbsp;
     		<select id="stateselected" onchange="mystate()" name='selectedstate'>
     			<?php
