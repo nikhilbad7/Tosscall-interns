@@ -38,7 +38,11 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 					$timeout = date('Y-m-d H:i:s', strtotime("+30 minutes", strtotime("$combinedDT")));
 					$beforetime = date('Y-m-d H:i:s', strtotime("-30 minutes", strtotime("$combinedDT")));
 					//echo "<script>console.log( 'Before date: " . $beforetime . "' );</script>";
+<<<<<<< HEAD
 					$query1 ="select * from event where ((init_user = '$username') or( acce_user ='$username')) and ( '$combinedDT' BETWEEN beforetime AND timeout)";
+=======
+					$query1 ="select * from event where ((init_user = '$username') or( acce_user ='$username')) and ( '$combinedDT' BETWEEN '$beforetime' AND timeout)";
+>>>>>>> 9fbae29b65770ff6c3e24ddc63b1db95057a1289
 					$rs1 = mysqli_query($c,$query1);
 					if($rs1){
 						$counter = 0;
@@ -130,11 +134,16 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 							var timecheck = document.getElementById('t').value;
 								
 							if(datecheck.length == 0 ){
-								alert('please select a date');
+								console.log('please select a date');
 							}
+<<<<<<< HEAD
 							else {
 							 if (timecheck.length!=0) {
 								//var timecheck = document.getElementById('t').value;
+=======
+							else{
+								var timecheck = document.getElementById('t').value;
+>>>>>>> 9fbae29b65770ff6c3e24ddc63b1db95057a1289
 								var combinedatetime = datecheck + " " + timecheck;
 							//alert(datecheck);
 							//alert(timecheck);
@@ -142,23 +151,37 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 							var xhttp = new XMLHttpRequest();
 							xhttp.onreadystatechange = function() {
 								if (this.readyState == 4 && this.status == 200) {
+<<<<<<< HEAD
 									//alert(this.responseText);
 									var response = this.responseText.trim();
 									alert(response);
 									if(response == 'false'){
 										alert('please change your time');
+=======
+									var response = this.responseText.trim();
+									//alert(response);
+									if(response == 'false'){
+										console.log('please change your time');
+>>>>>>> 9fbae29b65770ff6c3e24ddc63b1db95057a1289
 										}
     								}
   								};
 		 				    xhttp.open("GET","checkdatetime.php?combinedDT="+combinedatetime,true);
 		  					xhttp.send();
 							}
+<<<<<<< HEAD
 							
 						}
+=======
+>>>>>>> 9fbae29b65770ff6c3e24ddc63b1db95057a1289
 
 						}
 						if(n==4){
 							var datecheck =document.getElementById('date').value;
+							if(datecheck.length==0){
+								console.log('please select a date first');
+							}
+							else{
 							var timecheck = document.getElementById('t').value;
 							if(datecheck.length==0){
 								alert('please select a date first');
@@ -181,7 +204,11 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 									var response = this.responseText.trim();
 									alert(response);
 									if(response == 'false'){
+<<<<<<< HEAD
 										alert('please change your time');
+=======
+										console.log('please change your time');
+>>>>>>> 9fbae29b65770ff6c3e24ddc63b1db95057a1289
 										}
     								}
   								};
@@ -210,7 +237,11 @@ $NewDate=date('Y-m-d', strtotime("+7 days"));
 				</script>
 			<br/><br/>
 			<label>Select Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<<<<<<< HEAD
     		<input type="date" id = "date" name="dd" min="" max="" onfocus="currentdate()" onblur="onleave(3)" required="required"><br/><br/>
+=======
+    		<input type="date" id = "date" name="dd" min="" max="" onfocus="currentdate()" onblur="onleave(3)" ><br/><br/>
+>>>>>>> 9fbae29b65770ff6c3e24ddc63b1db95057a1289
     		<label>Select Time</label>&nbsp;&nbsp;&nbsp;&nbsp;
     		<input type="time" id = "t" name="t"  onblur="onleave(4)"><br/><br/>
     		<label>Select State</label>&nbsp;&nbsp;
