@@ -3,6 +3,7 @@ require('include/config.inc.php');
 require('include/session.inc.php');
 require('include/header.inc.php');
 require('include/testdate.php');
+require('include/status_updater.php');
 $current_time=date("H:i:s");
 $current_date=date("Y-m-d");
 $username=$_SESSION['username'];
