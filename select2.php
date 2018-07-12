@@ -49,11 +49,6 @@ if($rs1)
 				}
 				echo "</table>";
 			}
-		
-		
-
-
-		//++$i;
 	
 }
 //$time_str = implode("','" ,$mydatetime);

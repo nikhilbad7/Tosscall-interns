@@ -5,8 +5,6 @@ require('include/header.inc.php');
 require('include/status_updater.php');
 $username = $_SESSION['username'];
 ?>
-
-
 <html>
 <head>
 	<script type="text/javascript" src="jq.js"></script>
@@ -15,11 +13,6 @@ $username = $_SESSION['username'];
 <body>
 <?php showNav() ?>
 <hr>
-
-
-
-
-
 Type :<select name="type" id="type">
 
 <?php 
